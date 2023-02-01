@@ -9,11 +9,11 @@ import jakarta.persistence.Id
 @Entity
 class LegacyWheelEntity {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
-	var wheelId: Long = 0
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    var wheelId: Long = 0
 
-	@Column(nullable = false)
-	var carId: Long = 0
+    @Column(nullable = false)
+    var carId: Long = 0
 }

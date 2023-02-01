@@ -11,19 +11,19 @@ import java.math.BigDecimal
 
 @Entity
 class LegacyCarEntity {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(nullable = false)
-	var id: Long = 0
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
+    var id: Long = 0
 
-	@Column(nullable = false)
-	var fuelAmountPercent: BigDecimal = BigDecimal.ZERO
+    @Column(nullable = false)
+    var fuelAmountPercent: BigDecimal = BigDecimal.ZERO
 
-	@OneToMany(fetch = FetchType.LAZY)
-	var wheels: MutableList<LegacyWheelEntity> = mutableListOf()
+    @OneToMany(fetch = FetchType.LAZY)
+    var wheels: MutableList<LegacyWheelEntity> = mutableListOf()
 
-	companion object {
-		fun of(): LegacyCarEntity =
-			LegacyCarEntity()
-	}
+    companion object {
+        fun of(): LegacyCarEntity =
+            LegacyCarEntity()
+    }
 }
