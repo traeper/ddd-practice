@@ -27,7 +27,7 @@ class CarFactoryServiceTest {
         assertThat(savedCar).isNotNull
         assertThat(savedCar.wheels).hasSize(4)
 
-        // 만약 CascadeType.REMOVE를 쓰지 않는다면 h2의 기본 FK reference에 걸려서 Spring DataIntegrity 예외가 발생한다.
+        // CascadeType.REMOVE를 쓰지 않으면 h2의 기본 FK reference에 걸려서 Spring DataIntegrity 예외가 발생한다.
         carRepository.delete(savedCar)
 
         // Transactional이 걸려있는 테스트에서 delete query를 실행시키기 위함

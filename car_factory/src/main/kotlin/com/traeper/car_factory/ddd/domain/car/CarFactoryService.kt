@@ -1,9 +1,9 @@
 package com.traeper.car_factory.ddd.domain.car
 
-import org.springframework.stereotype.Service
+import com.traeper.ddd.core.DomainService
 import org.springframework.transaction.annotation.Transactional
 
-@Service
+@DomainService
 class CarFactoryService(
     private val carRepository: CarRepository,
 ) {
