@@ -1,3 +1,4 @@
 rootProject.name = "ddd-practice"
 
-include("gas_station")
+include("ddd_core")
+include("car_factory")

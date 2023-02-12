@@ -1,11 +1,13 @@
-package com.traeper.gas_station.legacy.domain
+package com.traeper.car_factory.legacy.domain.car
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
+import jakarta.persistence.Table
 
+@Table(name = "legacy_wheel")
 @Entity
 class LegacyWheelEntity {
 
@@ -16,4 +18,11 @@ class LegacyWheelEntity {
 
     @Column(nullable = false)
     var carId: Long = 0
+
+    companion object {
+        fun of(carId: Long): LegacyWheelEntity =
+            LegacyWheelEntity().apply {
+                this.carId = carId
+            }
+    }
 }
