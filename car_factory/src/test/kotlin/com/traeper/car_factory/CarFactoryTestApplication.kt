@@ -1,0 +1,6 @@
+package com.traeper.car_factory
+
+import org.springframework.boot.autoconfigure.SpringBootApplication
+
+@SpringBootApplication
+class CarFactoryTestApplication
