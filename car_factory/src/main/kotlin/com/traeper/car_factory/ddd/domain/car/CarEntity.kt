@@ -25,8 +25,14 @@ class CarEntity : AggregateRoot {
     @OneToMany(cascade = [CascadeType.PERSIST, CascadeType.REMOVE], mappedBy = "car")
     var wheels: MutableList<WheelEntity> = mutableListOf()
 
+    // 바퀴의 추가를 자동차가 관리한다.
     fun addWheel(wheel: WheelEntity) {
         wheels.add(wheel)
+    }
+
+    // 바퀴의 제거를 자동차가 관리한다.
+    fun removeWheel(wheel: WheelEntity) {
+        wheels.remove(wheel)
     }
 
     companion object {
