@@ -8,15 +8,15 @@ README.md와 소스코드를 각각 켜놓고 읽는 것을 추천한다. (테�
 ## 자동차 공장 설명
 Domain 간 유기적인 관계를 크게 이용하지 않는 [legacy](./src/main/kotlin/com/traeper/car_factory/legacy) 예제와 JPA의 여러 옵션을 활용하여 Aggregate 내부의 일관성을 유지하고 도메인에서 핵심이 되는 Aggregate Root등을 파악하기 쉬운 [ddd](./src/main/kotlin/com/traeper/car_factory/ddd) 예제를 작성하였다.
 
-자동차 공장에는 자동차, 바퀴 개념이 존재하는데 자동차 없는 바퀴는 존재하지 않는 것을 전제로 하여 자동차는 Aggregate Root, 바퀴는 자동차에 포함되어 생성 및 삭제되는 종속적인 개념으로 가정한다. 즉 시스템의 핵심을 자동차에 두었을 때 코드를 작성하였다.
+자동차 공장에는 자동차, 바퀴 개념이 존재하는데 자동차 없는 바퀴는 존재하지 않는 것을 전제로 하여 자동차는 Aggregate Root, 바퀴는 자동차에 포함되어 생성 및 삭제되는 종속적인 개념으로 가정한다. 즉 시스템의 핵심을 자동차에 두어 코드를 작성하였다.
 
 ### legacy vs ddd 비교 미리보기
 ![](../resources/car_factory/car_factory-project-tree.png)
 
-legacy가 ddd에 비해 WheelRepository를 하나 더 가지고 있는 것을 볼 수 있다. 단순히 파일 목록만 보면 바퀴의 지위와 쓰임새가 자동차와 동등한 수준일 수도 있다는 생각이 든다. 물론 바퀴와 자동차를 보면 누구나 자동차가 핵심이라고 생각할 것이지만 실제로 도메인이 복잡한 현업에서는 어떤 객체가 더 핵심인지 한 눈에 살펴보기 힘들 수 있을 수 있다.
+legacy가 ddd에 비해 WheelRepository를 하나 더 가지고 있는 것을 볼 수 있다. 잘 모르는 사람이 위 파일 목록을 봤을 때는 바퀴의 지위와 쓰임새가 자동차와 동등한 수준일 수도 있다는 생각이 든다. 물론 바퀴와 자동차를 보면 누구나 자동차가 핵심이라고 생각할 것이지만 실제로 도메인이 복잡한 현업에서는 어떤 객체가 더 핵심인지 한 눈에 살펴보기 힘들 수 있다.
 
 ### legacy 예제
-자동차([LegacyCarEntity](./src/main/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarEntity.kt))에 바퀴를 OneToMany로 붙여서 fetch join까지는 활용하도록 했지만 자동차와 바퀴는 엄연히 독립적으로 관리되는 것을 알 수 있다. [테스트코드](./src/test/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarFactoryServiceTest.kt)를 보면 바퀴 Repository가 독립적으로 존재하여 관리되므로 바퀴가 자동차에 완전히 종속적인 개념인지 알기 어렵다. 즉 코드를 봤을 때 어떤 개념이 프로젝트의 핵심이 되는지 한 눈에 알기 어렵다.
+자동차([LegacyCarEntity](./src/main/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarEntity.kt))에 바퀴를 OneToMany로 달아서 fetch join까지는 활용하도록 했지만 자동차와 바퀴는 엄연히 독립적으로 관리되는 것을 알 수 있다. [테스트코드](./src/test/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarFactoryServiceTest.kt)를 보면 바퀴 Repository가 독립적으로 존재하여 관리되므로 바퀴가 자동차에 완전히 종속적인 개념인지 알기 어렵다. 즉 어떤 개념이 좀 더 핵심이 되는지 한 눈에 보기 어렵다.
 
 ```kotlin
 @Entity
@@ -57,7 +57,7 @@ class LegacyWheelEntity {
 바퀴와 연관 관계는 있지만 바퀴는 독립적으로 조작(CRUD)될 수 있는 가능성이 있다.
 이런 코드라면 프로그램 실행 중에 자동차 객체 자신도 모르게 바퀴가 하나 더 달려버리는 문제가 생길 수 있다.
 
-[LegacyCarFactoryService](./src/main/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarFactoryService.kt)를 보면 자동차와 바퀴를 따로 생성해야 하는 것을 볼 수 있고 Service의 의존성이 2개인 것을 알 수 있다. 비즈니스가 복잡해지면서 의존성은 훨씬 복잡해질텐데 이대로라면 핵심을 파악하기 어려워지지 않을까? 
+[LegacyCarFactoryService](./src/main/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarFactoryService.kt)를 보면 자동차와 바퀴를 따로 생성해야 하는 것을 볼 수 있고 Service의 의존성이 2개인 것을 알 수 있다. 비즈니스가 복잡해지면 의존하는 리포지토리나 빈이 훨씬 많아질텐데 이대로라면 핵심을 파악하기 훨씬 어려워지지 않을까? 
 
 ```kotlin
 @Service
@@ -79,7 +79,7 @@ class LegacyCarFactoryService(
 ```
 
 ### ddd 예제
-ddd 예제에서도 자동차([CarEntity](./src/main/kotlin/com/traeper/car_factory/ddd/domain/car/CarEntity.kt))는 OneToMany로 바퀴를 관리하는데 달라진 점은 Cascade 옵션을 주어 자동차가 생성, 삭제될 때 바퀴도 따라 생성, 삭제되도록 하여 바퀴의 생애가 자동차에 종속적인 것임을 알 수 있는 것이다. 이제는 바퀴 Repository가 존재하지 않아 바퀴를 독립적으로 제어할 수 없다. 그리고 자동차와 바퀴에 AggregateRoot와 DomainEntity interface를 붙여 둘의 관계를 명확하게 표현하였다. 
+ddd 예제에서도 자동차([CarEntity](./src/main/kotlin/com/traeper/car_factory/ddd/domain/car/CarEntity.kt))는 OneToMany로 바퀴를 관리하는데 달라진 점은 Cascade 옵션을 주어 자동차가 생성, 삭제될 때 바퀴도 따라 생성, 삭제되도록 하여 바퀴의 생애가 자동차에 종속적인 것임을 알 수 있게 된 것이다. 이제는 바퀴 Repository가 존재하지 않아 바퀴를 독립적으로 제어할 수 없다. 그리고 자동차와 바퀴에 AggregateRoot, DomainEntity interface로 수식하여 둘의 관계와 중요도를 좀 더 명확하게 표현하였다. 
 
 ```kotlin
 @Entity
@@ -131,7 +131,7 @@ class WheelEntity : DomainEntity<CarEntity> {
 legacy와 다르게 자동차가 바퀴를 직접 관리한다. 즉 자동차와 바퀴의 상태는 Aggregate Root인 자동차를 통해서만 변경할 수 있으며 프로그램 실행 중에 자동차 객체는 자신에게 바퀴가 달리는지, 없어지는지 항상 알 수 있다. 즉 자동차와 바퀴의 집합이 일관성 있게 변경되는 것이다. 
 
 
-[CarFactoryService](./src/main/kotlin/com/traeper/car_factory/ddd/domain/car/CarFactoryService.kt)를 보면 legacy와 다르게 WheelRepository가 더는 존재하지 않으며 자동차를 통해서만 바퀴 추가가 가능하다. 의존성으로 보나 어떤 객체가 중요한지를 보나 로직에서 핵심이 무엇인지 알기 쉬워졌다.
+[CarFactoryService](./src/main/kotlin/com/traeper/car_factory/ddd/domain/car/CarFactoryService.kt)를 보면 legacy와 다르게 WheelRepository가 더는 존재하지 않으며 자동차를 통해서만 바퀴 추가가 가능하다. 의존성도 legacy에 비해 줄었으며 로직에서 핵심이 무엇인지 알기 더욱 쉬워졌다.
 
 ```kotlin
 @DomainService
