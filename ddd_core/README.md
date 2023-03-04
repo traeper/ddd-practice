@@ -1,4 +1,7 @@
 # DDD Core
+
+![](../resources/DDD.png)
+
 DDD에서 언급되는 Aggregate Root, Domain Service, Domain Event 등을 코드로 녹여냈다.
 예전에 함께 일했던 동료가 작성한 것을 보고 감명 깊었던 적이 있어서 나도 이렇게 코드를 작성해본다.
 
