@@ -11,7 +11,7 @@ DDD에서 언급되는 Aggregate Root, Domain Service, Domain Event 등을 코�
 
 ## Domain Entity
 Aggregate Root가 아닌 Domain 객체는 Repository를 가질 수 없어야 하며 연관된 AggregateRoot가 존재한다. 이를 코드로 구현하기 위해 [DomainEntity interface](./src/main/kotlin/com/traeper/ddd/core/DomainEntity.kt)를 정의하였고 연관된 AggregateRoot를 명시하도록 하였다.   
-* 사용 예시 : [CarEntity](../car_factory/src/main/kotlin/com/traeper/car_factory/ddd/domain/car/CarEntity.kt)
+* 사용 예시 : [WheelEntity](../car_factory/src/main/kotlin/com/traeper/car_factory/ddd/domain/car/WheelEntity.kt)
 
 ## DomainService
 [DomainService](./src/main/kotlin/com/traeper/ddd/core/DomainService.kt)를 추가하여 Domain Layer의 DomainService임을 명시해준다. 이 개념을 추가한 이유는 Layered Architecture 기반에서 프로그래밍하는 경우 상위 레이어인 ApplicationService와 구분하기 위함이다. DomainService는 단일 Repository만으로 해결할 수 없거나 인접한 Domain 간 복잡도가 높은 비즈니스를 수행하기 위해 이용하는 용도이다. 
