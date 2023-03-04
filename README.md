@@ -1,5 +1,7 @@
 # DDD (Domain Driven Design)
 
+![](resources/DDD.png)
+
 ## DDD vs OOP?
 OOP : 패러다임(함수형 등)
 DDD : 방법론(TDD, BDD 등)
