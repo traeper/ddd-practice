@@ -13,10 +13,10 @@ Domain 간 유기적인 관계를 크게 이용하지 않는 [legacy](./src/main
 ### legacy vs ddd 비교 미리보기
 ![](../resources/car_factory/car_factory-project-tree.png)
 
-legacy가 ddd에 비해 WheelRepository를 하나 더 가지고 있는 것을 볼 수 있다. 단순히 파일 목록만 보면 wheel의 지위와 쓰임새가 car와 동등한 수준일 수도 있다는 생각이 든다. 물론 wheel과 car의 관계는 누구나 알다시피 car가 높다고 생각하기 마련이지만 실제로 도메인이 복잡한 현업에서는 어떤 객체가 더 중요한지, 핵심 도메인인지 한 눈에 살펴보기 힘들 수 있을 수 있다.  
+legacy가 ddd에 비해 WheelRepository를 하나 더 가지고 있는 것을 볼 수 있다. 단순히 파일 목록만 보면 바퀴의 지위와 쓰임새가 자동차와 동등한 수준일 수도 있다는 생각이 든다. 물론 바퀴와 자동차를 보면 누구나 자동차가 핵심이라고 생각할 것이지만 실제로 도메인이 복잡한 현업에서는 어떤 객체가 더 핵심인지 한 눈에 살펴보기 힘들 수 있을 수 있다.  
 
 ### legacy 예제
-자동차([LegacyCarEntity](./src/main/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarEntity.kt)에 바퀴를 OneToMany로 붙여서 fetch join까지는 활용하도록 했지만 자동차와 바퀴는 엄연히 독립적으로 관리되는 것을 알 수 있다. [테스트코드](./src/test/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarFactoryServiceTest.kt)를 보면 바퀴 Repository가 독립적으로 존재하여 관리되므로 바퀴가 자동차에 완전히 종속적인 개념인지 알기 어렵다. 즉 코드를 봤을 때 어떤 개념이 프로젝트의 핵심이 되는지 한 눈에 알기 어렵다.
+자동차([LegacyCarEntity](./src/main/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarEntity.kt))에 바퀴를 OneToMany로 붙여서 fetch join까지는 활용하도록 했지만 자동차와 바퀴는 엄연히 독립적으로 관리되는 것을 알 수 있다. [테스트코드](./src/test/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarFactoryServiceTest.kt)를 보면 바퀴 Repository가 독립적으로 존재하여 관리되므로 바퀴가 자동차에 완전히 종속적인 개념인지 알기 어렵다. 즉 코드를 봤을 때 어떤 개념이 프로젝트의 핵심이 되는지 한 눈에 알기 어렵다.
 
 ### ddd 예제
 자동차([CarEntity](./src/main/kotlin/com/traeper/car_factory/ddd/domain/car/CarEntity.kt)도 바퀴를 마찬가지로 OneToMany으로 관리하는데 legacy와 다른 점은 Cascade 옵션을 주어 자동차가 생성, 삭제될 때 바퀴도 따라 생성, 삭제되는 것이다. 바퀴 Repository가 존재하지 않아 바퀴를 직접적으로 제어할 수 없는 것을 볼 수 있다. 즉 바퀴는 독립적으로 존재할 수 없는 개념인 것과 동시에 자동차에 종속된 것을 알 수 있다. 그리고 자동차와 바퀴에 AggregateRoot와 DomainEntity interface를 붙여 둘의 관계를 명확하게 표현하였다. 
