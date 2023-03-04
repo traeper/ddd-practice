@@ -10,7 +10,10 @@ Domain 간 유기적인 관계를 크게 이용하지 않는 [legacy](./src/main
 
 자동차 공장에는 자동차, 바퀴 개념이 존재하는데 자동차 없는 바퀴는 존재하지 않는 것을 전제로 하여 자동차는 Aggregate Root, 바퀴는 자동차에 포함되어 생성 및 삭제되는 종속적인 개념으로 가정한다. 즉 시스템의 핵심을 자동차에 두었을 때 코드를 작성하였다.
 
-(예제 작성 시 바퀴는 자동차의 특성(VO)이 아닌 영속성이 있는 Entity의 지위로 간주하였다.)
+### legacy vs ddd 비교 미리보기
+![](../resources/car_factory/car_factory-project-tree.png)
+
+legacy가 ddd에 비해 WheelRepository를 하나 더 가지고 있는 것을 볼 수 있다. 단순히 파일 목록만 보면 wheel의 지위와 쓰임새가 car와 동등한 수준일 수도 있다는 생각이 든다. 물론 wheel과 car의 관계는 누구나 알다시피 car가 높다고 생각하기 마련이지만 실제로 도메인이 복잡한 현업에서는 어떤 객체가 더 중요한지, 핵심 도메인인지 한 눈에 살펴보기 힘들 수 있을 수 있다.  
 
 ### legacy 예제
 자동차([LegacyCarEntity](./src/main/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarEntity.kt)에 바퀴를 OneToMany로 붙여서 fetch join까지는 활용하도록 했지만 자동차와 바퀴는 엄연히 독립적으로 관리되는 것을 알 수 있다. [테스트코드](./src/test/kotlin/com/traeper/car_factory/legacy/domain/car/LegacyCarFactoryServiceTest.kt)를 보면 바퀴 Repository가 독립적으로 존재하여 관리되므로 바퀴가 자동차에 완전히 종속적인 개념인지 알기 어렵다. 즉 코드를 봤을 때 어떤 개념이 프로젝트의 핵심이 되는지 한 눈에 알기 어렵다.
