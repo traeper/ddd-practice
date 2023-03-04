@@ -1,9 +1,9 @@
 # DDD 프랙티스 #1 자동차 공장
 ![](../resources/DDD.png)
 
-DDD스럽게 코드를 작성하는 방법을 탐구하는 자동차 공장 예제.
-JPA를 적극적으로 사용하여 DDD를 구현하는 예제이며 전통적인(?) 개발 보다는 장점이 있음을 확인하였다.
-여기서는 언어만 이용하여 순수한 도메인을 추출하는 시도까지는 하지 않는다. 그리고 스프링의 Transactional, Service 정도 까지는 활용한다.
+DDD스러운 코드를 작성하는 방법을 탐구하는 자동차 공장 예제.
+JPA 기반으로 작성한 예제이며 보다 핵심 도메인에 집중할 수 있는 장점이 있음을 확인할 수 있었다.
+README.md와 코드를 각각 켜놓고 읽는 것을 추천한다.
 
 ## 자동차 공장 설명
 Domain 간 유기적인 관계를 크게 이용하지 않는 [legacy](./src/main/kotlin/com/traeper/car_factory/legacy) 예제와 JPA의 여러 옵션을 활용하여 Aggregate 내부의 일관성을 유지하고 도메인에서 핵심이 되는 Aggregate Root등을 파악하기 쉬운 [ddd](./src/main/kotlin/com/traeper/car_factory/ddd) 예제를 작성하였다.
@@ -20,5 +20,5 @@ Domain 간 유기적인 관계를 크게 이용하지 않는 [legacy](./src/main
 
 [테스트코드](./src/test/kotlin/com/traeper/car_factory/ddd/domain/car/CarFactoryServiceTest.kt)를 보면 바퀴 Repository가 더는 존재하지 않고 자동차에 초점이 맞춰진 것을 볼 수 있다.
 
-## 기타
-* 새로운 요구사항으로 인해 만약 바퀴가 Aggregate Root로 승격하는 경우는 없을까? 이런 경우 자동차와 다른 Aggregate가 되는데 그럴 때는 자동차와 바퀴 관계를 어떻게 개발해야 할까? -> DomainEvent 프랙티스 작성 예정 
+## 질문
+* 새로운 요구사항으로 인해 만약 바퀴가 Aggregate Root로 승격하는 경우는 없을까? 이런 경우 자동차와 다른 Aggregate로 개발되어야 되는데 그럴 때는 자동차와 바퀴 관계를 어떻게 개발해야 할까?
