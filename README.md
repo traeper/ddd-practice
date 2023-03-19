@@ -30,6 +30,11 @@ DDD와 다른 TDD, BDD의 차이점으로 DDD는 개발자 외에도 기획자, 
 * [DDD 코어](./ddd_core/README.md) : DDD 개념을 코드로 옮긴다.
 * [자동차 공장](./car_factory/README.md) : 자동차 공장을 예로 들어 작성한 DDD 예시
 
+## ChatGPT에게 물어본 DDD
+![chatgpt-what-is-ddd.png](resources/chatgpt-what-is-ddd.png)
+ChatGPT에게 DDD에 대해 물어보니 상세하게 잘 정리해줘서 참 유용한 것 같다.
+본 블로깅에서는 DDD에 대해 정리해보겠다.
+
 ## Reference
 * 도메인 주도 설계 핵심 - 반 버논 (번역본) : https://product.kyobobook.co.kr/detail/S000001804574
 * ㄷㄷㄷ: Domain Driven Design과 적용 사례공유 / if(kakao)2022 https://youtu.be/4QHvTeeTsj0
