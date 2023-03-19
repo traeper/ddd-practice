@@ -32,8 +32,8 @@ DDD와 다른 TDD, BDD의 차이점으로 DDD는 개발자 외에도 기획자, 
 
 ## ChatGPT에게 물어본 DDD
 ![chatgpt-what-is-ddd.png](resources/chatgpt-what-is-ddd.png)
-ChatGPT에게 DDD에 대해 물어보니 상세하게 잘 정리해줘서 참 유용한 것 같다.
-본 블로깅에서는 DDD에 대해 정리해보겠다.
+
+ChatGPT에게 DDD에 대해 물어보니 상세하게 잘 정리해줘서 참 유용한 것 같다. 버릴 문장이 없다.
 
 ## Reference
 * 도메인 주도 설계 핵심 - 반 버논 (번역본) : https://product.kyobobook.co.kr/detail/S000001804574
